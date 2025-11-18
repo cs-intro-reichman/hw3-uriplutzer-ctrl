@@ -72,26 +72,45 @@ public class Algebra {
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
 		// Replace the following statement with your code
-		int run = x;
-		int clone = x;
-		int sum = 0;
-		for (int i = 0; i < n; i++) {
-			clone = times(x, x);
-			sum = times(run, clone);
-
+		if (n == 0) {
+			return 1;
 		}
-		return sum;
+		int result = x;
+		for (int i = 1; i < n; i++) {
+			result = times(result, x);
+		}
+		return result;
 	}
 
 	// Returns the integer part of x1 / x2
 	public static int div(int x1, int x2) {
 		// Replace the following statement with your code
-		int clone = x1;
+		if (x2 == 0) {
+			return 0;
+		}
+		boolean negativeResult = false;
+
+		if (x1 < 0) {
+			x1 = minus(0, x1); // x1 = abs(x1)
+			negativeResult = !negativeResult;
+		}
+		if (x2 < 0) {
+			x2 = minus(0, x2); // x2 = abs(x2)
+			negativeResult = !negativeResult;
+		}
+
 		int count = 0;
-		for (int i = clone; i >= x2; i++) {
-			clone = minus(clone, x2);
+		int sum = x2;
+
+		while (sum <= x1) {
+			sum = sum + x2; // manually we could also use a times + minus loop, but simple addition works
 			count++;
 		}
+
+		if (negativeResult) {
+			count = minus(0, count);
+		}
+
 		return count;
 	}
 
@@ -99,23 +118,18 @@ public class Algebra {
 	public static int mod(int x1, int x2) {
 		// Replace the following statement with your code
 
-		int rest = minus(x1, times(x2, div(x1, x2)));
+		int remainder = minus(x1, times(x2, div(x1, x2)));
 
-		return rest;
+		return remainder;
 	}
 
 	// Returns the integer part of sqrt(x)
 	public static int sqrt(int x) {
 		// Replace the following statement with your code
-		int clone = x;
-		int count = 0;
-		for (int i = 0; i <= x; i++) {
-			if (times(count, count) == clone) {
-				return count;
-			} else {
-				count++;
-			}
+		int i = 0;
+		while (times(i, i) <= x) {
+			i = plus(i, 1);
 		}
-		return 0;
+		return minus(i, 1);
 	}
 }
