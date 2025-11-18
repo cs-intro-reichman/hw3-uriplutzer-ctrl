@@ -88,7 +88,7 @@ public class Algebra {
 		// Replace the following statement with your code
 		int clone = x1;
 		int count = 0;
-		for (int i = 0; clone >= x2; i++) {
+		for (int i = clone; i >= x2; i++) {
 			clone = minus(clone, x2);
 			count++;
 		}

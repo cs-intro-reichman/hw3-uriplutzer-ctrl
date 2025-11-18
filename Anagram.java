@@ -65,8 +65,15 @@ public class Anagram {
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
 		// Replace the following statement with your code
-		String lowerString = str.replaceAll("[^a-zA-Z ]", "").toLowerCase();
-		return lowerString;
+		String result = "";
+		for (int i = 0; i < str.length(); i++) {
+			char c = str.charAt(i);
+			if (Character.isLetter(c)) {
+				result += Character.toLowerCase(c);
+			}
+		}
+
+		return result;
 	}
 
 	// Returns a random anagram of the given string. The random anagram consists of
